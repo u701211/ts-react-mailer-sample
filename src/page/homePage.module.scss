@@ -1,0 +1,141 @@
+.root{
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  > :first-child{//サイドバー
+    > input{//示/非表示の制御用
+      display: none;
+    }
+    > div{//背景
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.2);
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      display: none;
+    }
+    > input[type="checkbox"]:checked + div {
+      display: block;
+    }
+    > aside{
+      width: 0px;
+      position: fixed;
+      margin-right: auto;
+      padding: 0px;
+      background-color: #EEFFFF;
+      z-index: 9999;
+      height: 100vh;
+      transition: width 1s ease; 
+      overflow: hidden;
+      > :first-child{
+        width: 250px;//閉じるときに変形しないように。
+        > ul{
+          list-style: none;
+          margin: 10px;
+          padding: 0px;
+          > li{
+            list-style: none;
+            margin: 0px;
+            padding: 5px;
+            display: flex;
+            border-radius: 10px;
+            > button{
+              border: none;
+              background-color: transparent;
+            }
+          }
+          > li.selected{
+            background-color: #5D99FF;
+          }
+        }
+      }
+    }
+    > input[type="checkbox"]:checked + aside {
+      width: 250px;
+      padding: 5px;
+    }
+  }
+  > :last-child{//メインコンテンツ
+    display: flex;
+    flex-direction: column;
+    > :nth-child(2){//検索バー
+      transition: 1s ease; 
+      position: fixed;
+      z-index: 999;
+      display: flex;
+      width: 100%;
+      padding: 5px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      background-color: #EEFFFF;
+      height: 50px;
+      > button{
+        border: none;
+        background-color: transparent;
+      }
+      > input{
+        flex-grow: 1;
+        border: none;
+        background-color: transparent;
+      }
+    }
+    > input[type="checkbox"]:checked + :nth-child(2) {//検索バー制御
+      transform: translateY(-60px);
+    }
+    > :last-child{//コンテンツ
+      margin: 50px 5px 5px 5px;
+      width: calc(100vw - 10px);
+      display: flex;
+      flex-direction: column;
+      > :first-child{//受信トレイ
+        
+      }
+      
+      > ul{//メール一覧
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        
+        > li{
+          display: flex;
+          margin: 10px 0px 0px 0px;
+          padding: 0px;
+          width: 100%;
+
+          > :first-child{//アバター
+            margin-right: 10px;
+          }
+          > :last-child{//詳細
+            flex-grow: 1;
+            > :first-child{//送信元と時刻
+              display: flex;
+              width: 100%;
+              > :first-child{//送信元
+                font-weight: bold;
+                flex-grow: 1;
+              }
+              > :first-child{//時刻
+                font-weight: bold;
+
+              }
+            }
+            > :nth-child(2){//件名
+              font-weight: bold;
+
+            }
+            > :last-child{//本文
+              max-width: calc(100vw - 60px);
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+  

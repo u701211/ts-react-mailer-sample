@@ -1,5 +1,6 @@
 import React from "react";
 import { LoadingPage } from "../component/loadingPage";
+import styles from "./pageLayout.module.scss";
 
 export const PageLayout = (
   props: {
@@ -15,8 +16,8 @@ export const PageLayout = (
   }, [props.title]);
 
   return (
-    <>
+    <div className={styles.root}>
       {isInitialized ? props.children : <LoadingPage isVisible={true} />}
-    </>
+    </div>
   );
 }

@@ -2,9 +2,11 @@
   "name": "ts-react-mailer-sample",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://akatonboX.github.io/ts-react-mailer-sample/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -41,10 +43,11 @@
     "workbox-streams": "^6.5.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env REACT_APP_AXIOS_MODE=mock react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -66,6 +69,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "gh-pages": "^5.0.0",
     "sass": "^1.58.1"
   }
 }

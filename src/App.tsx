@@ -5,8 +5,10 @@ import { MessageboxProvider } from './lib/messagebox';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NotFoundPage } from './page/notFoundPage';
 import { HomePage } from './page/homePage';
+import { registMocks } from './api';
 
 function App() {
+  registMocks();
   return (
     <MessageboxProvider>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
