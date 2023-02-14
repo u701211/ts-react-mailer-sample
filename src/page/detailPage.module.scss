@@ -1,0 +1,66 @@
+.root{
+  width: 100%;
+  >:first-child{//アプリケーションバー
+    height: 60px;
+    background-color: #EEFFFF;
+    display:  flex;
+    > :first-child{
+      flex-grow: 1;
+      display: flex;
+    }
+    > :last-child{
+      display: flex;
+      
+    }
+    
+  }
+  > :last-child{//コンテンツ
+    width: 100%;
+    > :first-child{//件名
+      font-weight: bold;
+      font-size: 16pt;
+      margin: 10px;
+    }
+    > :nth-child(2){//送信元など
+      margin: 10px;
+      display: flex;
+      width: 100%;
+      > :first-child{
+
+      }
+      > :nth-child(2){
+        margin: 0px 10px 0px 10px;
+        flex-grow: 1;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        > :first-child{
+          display: flex;
+          width: 100%;
+          > :first-child{
+            flex-grow: 1;
+            width: 100%;
+            > :first-child{
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+              max-width: 100%;
+            }
+           
+          }
+        }
+      }
+      > :last-child{
+
+      }
+    }
+    > :last-child{//本文
+      margin: 10px;
+      white-space: pre;
+    }
+  }
+}
+button{
+  border: none;
+  background-color: transparent;
+}

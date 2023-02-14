@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { NotFoundPage } from './page/notFoundPage';
 import { HomePage } from './page/homePage';
 import { registMocks } from './api';
+import { DetailPage } from './page/detailPage';
 
 function App() {
   registMocks();
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path="/" component={HomePage} exact />
+          <Route path="/mails/" component={DetailPage} />
           <Route path="/" component={NotFoundPage} />
         </Switch>
       </BrowserRouter>

@@ -6,7 +6,7 @@ import { apimodel } from '../api';
 import { useAxios } from '../lib/axios';
 import { Avatar } from '@mui/material';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import TextField from '@mui/material/TextField';
+import { useHistory } from 'react-router-dom';
 
 export const HomePage = function(
   props: {
@@ -14,6 +14,8 @@ export const HomePage = function(
 ) 
 {
   const axios = useAxios();
+  const history = useHistory();
+  
   //■サイドバーを表示するかどうか
   const [isSideBarVisible, setIsSideBarVisible] = React.useState(false);
 
@@ -67,15 +69,15 @@ export const HomePage = function(
     <PageLayout title="メール一覧" isInitialized={messages != null}>
       <div className={styles.root}>
         <div>{/* サイドバーバー */}
-          <input type="checkbox" checked={isSideBarVisible}/>{/* 表示/非表示の制御用 */}
+          <input type="checkbox" checked={isSideBarVisible} onChange={e =>{}} />{/* 表示/非表示の制御用 */}
           <div onClick={e=>{e.preventDefault();setIsSideBarVisible(false);}}/>{/* 背景 */}
-          <input type="checkbox" checked={isSideBarVisible}/>{/* 表示/非表示の制御用 */}
+          <input type="checkbox" checked={isSideBarVisible} onChange={e =>{}} />{/* 表示/非表示の制御用 */}
           <aside>{/* サイドバーバー本体 */}
             <div>
               <ul>
-                {folders.map(item => {
+                {folders.map((item, index) => {
                   return (
-                    <li className={item === currentFolder ? styles.selected : undefined}>
+                    <li key={index} className={item === currentFolder ? styles.selected : undefined}>
                       <FolderOpenIcon/>
                       <button onClick={e => {e.preventDefault();setCurrentFolder(item);setIsSideBarVisible(false);}}>{item}</button>
                     </li>
@@ -87,7 +89,7 @@ export const HomePage = function(
         </div>
         
         <div>{/* メインコンテンツ */}
-          <input type="checkbox" checked={!isSearchBarVisible}/>{/* 表示/非表示の制御用 */}
+          <input type="checkbox" checked={!isSearchBarVisible} onChange={e =>{}} />{/* 表示/非表示の制御用 */}
           <div>{/* 検索バー */}
             <button onClick={(e) => {e.preventDefault();setIsSideBarVisible(true);}}>
               <DehazeIcon />
@@ -97,9 +99,9 @@ export const HomePage = function(
           <div>{/* コンテンツ */}
             <div>{currentFolder}</div>
             <ul>
-            {messages?.map(item => {
+            {messages?.map((item, index) => {
               return (
-                <li>
+                <li key={index} onClick={e => {e.preventDefault(); history.push(`./mails/${item.id}`)}}>
                   <div>{/* アバター */}
                     <Avatar sx={{ width: 45, height: 45 }}>{item.from.substring(0, 1)}</Avatar>
                   </div>
