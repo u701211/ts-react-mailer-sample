@@ -40,7 +40,7 @@ import { ApiMock } from "./axiosMock";
   * @param requestBody リクエストボディ
   * @param type 要求されたリクエストのタイプ
   */
-  createData?: (requestBody: any, type: "post" | "put") => T;
+  createData?: (requestBody: any, type: "post" | "put", currentData?: T) => T;
 }
 
 /**
@@ -82,7 +82,7 @@ interface MultiRestApiMockProps<T_DATA, T_SEARCH = T_DATA, T_GET = T_DATA> exten
    * @param request 検索条件を含んだリクエスト
    * @return 見つかったdataのindex。見つからない場合は、undefined
    */
-  find?: (data: T_DATA[], request: AxiosRequestConfig) => number | undefined;
+  find?: (data: T_DATA[], url: URL, request: AxiosRequestConfig) => number | undefined;
   /**
    * 検索条件に一致しるデータだけにfilterする。
    * searchで利用される。
@@ -93,7 +93,7 @@ interface MultiRestApiMockProps<T_DATA, T_SEARCH = T_DATA, T_GET = T_DATA> exten
    */
   search?: (data: T_DATA[], url: URL, request: AxiosRequestConfig) => T_SEARCH[];
 
-  get?: (data: T_DATA) => T_GET;
+  get?: (datum: T_DATA) => T_GET;
   /**
    * putの場合、作成を許すかどうか。省略した場合は許可。
    */
@@ -184,7 +184,8 @@ export class SingleRestApiMock<T> extends RestApiMock<T, SingleRestApiMockProps<
         } as AxiosResponse;
       case "put":
         {
-          const datum = this.props.createData != null ? this.props.createData(request.data, type) : request.data as T;
+          const requestData = lodash.isString(request.data) ? JSON.parse(request.data) : request.data;
+          const datum = this.props.createData != null ? this.props.createData(requestData, type, this.data) : requestData as T;
           this.data = datum;
           return {
             data: this.data,
@@ -293,7 +294,7 @@ export class SingleRestApiMock<T> extends RestApiMock<T, SingleRestApiMockProps<
         }
       case "get": 
         {
-          const index = this.props.find == null ? 0 : this.props.find(this.data, request);
+          const index = this.props.find == null ? 0 : this.props.find(this.data, requestUrl, request);
           if(index == null){
             return {
               status: 404,
@@ -309,7 +310,8 @@ export class SingleRestApiMock<T> extends RestApiMock<T, SingleRestApiMockProps<
         }
       case "post": 
         {
-          const data = this.props.createData != null ? this.props.createData(request.data, type) : request.data as T;
+          const requestData = lodash.isString(request.data) ? JSON.parse(request.data) : request.data;
+          const data = this.props.createData != null ? this.props.createData(requestData, type) : requestData as T;
           this.data.push(data);
           return {
             data: data,
@@ -318,8 +320,9 @@ export class SingleRestApiMock<T> extends RestApiMock<T, SingleRestApiMockProps<
         }
       case "put":
         {
-          const index = this.props.find == null ? 0 : this.props.find(this.data, request);
-          const data = this.props.createData != null ? this.props.createData(request.data, type) : request.data as T;
+          const index = this.props.find == null ? 0 : this.props.find(this.data, requestUrl, request);
+          const requestData = lodash.isString(request.data) ? JSON.parse(request.data) : request.data;
+          const data = this.props.createData != null ? this.props.createData(requestData, type, index != null ? this.data[index] : undefined) : requestData as T;
           if(index == null){
             if(this.props.allowCreateWhenPut ?? true){
               this.data.push(data);
@@ -344,7 +347,7 @@ export class SingleRestApiMock<T> extends RestApiMock<T, SingleRestApiMockProps<
         }
       case "delete":
         {
-          const index = this.props.find == null ? 0 : this.props.find(this.data, request);
+          const index = this.props.find == null ? 0 : this.props.find(this.data, requestUrl, request);
           if(index == null){
             return {
               status: 404,

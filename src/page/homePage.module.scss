@@ -2,7 +2,20 @@
   display: flex;
   width: 100%;
   min-height: 100%;
-  > :first-child{//サイドバー
+  div{
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  > :first-child{//サイドバー開閉のタップ受付
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.001);
+    position: fixed;
+    width: 20px;
+    height: 100vh;
+    z-index: 999999;
+  }
+  > :nth-child(2){//サイドバー
     > input{//示/非表示の制御用
       display: none;
     }
@@ -28,7 +41,7 @@
       background-color: #EEFFFF;
       z-index: 9999;
       height: 100vh;
-      transition: width 1s ease; 
+      transition: width 0.5s ease; 
       overflow: hidden;
       > :first-child{
         width: 250px;//閉じるときに変形しないように。
@@ -62,7 +75,7 @@
     display: flex;
     flex-direction: column;
     > :nth-child(2){//検索バー
-      transition: 1s ease; 
+      transition: 0.5s ease; 
       position: fixed;
       z-index: 999;
       display: flex;
@@ -86,7 +99,7 @@
       transform: translateY(-60px);
     }
     > :last-child{//コンテンツ
-      margin: 50px 5px 5px 5px;
+      margin: 50px 0px 5px 0px;
       width: calc(100vw - 10px);
       display: flex;
       flex-direction: column;
@@ -98,40 +111,43 @@
         list-style: none;
         margin: 0px;
         padding: 0px;
-        
+         
         > li{
-          display: flex;
-          margin: 10px 0px 0px 0px;
-          padding: 0px;
-          width: 100%;
+          padding: 5px;
+          .MenuItem{
+            display: flex;
+            margin: 10px 0px 0px 0px;
+            padding: 0px;
+            width: 100%;
 
-          > :first-child{//アバター
-            margin-right: 10px;
-          }
-          > :last-child{//詳細
-            flex-grow: 1;
-            > :first-child{//送信元と時刻
-              display: flex;
-              width: 100%;
-              > :first-child{//送信元
-                font-weight: bold;
-                flex-grow: 1;
-              }
-              > :first-child{//時刻
-                font-weight: bold;
-
-              }
+            > :first-child{//アバター
+              margin-right: 10px;
             }
-            > :nth-child(2){//件名
-              font-weight: bold;
+            > :last-child{//詳細
+              flex-grow: 1;
+              > :first-child{//送信元と時刻
+                display: flex;
+                width: 100%;
+                > :first-child{//送信元
+                  font-weight: bold;
+                  flex-grow: 1;
+                }
+                > :first-child{//時刻
+                  font-weight: bold;
 
-            }
-            > :last-child{//本文
-              max-width: calc(100vw - 60px);
-              text-overflow: ellipsis;
-              overflow: hidden;
-              white-space: nowrap;
-              white-space: pre;
+                }
+              }
+              > :nth-child(2){//件名
+                font-weight: bold;
+
+              }
+              > :last-child{//本文
+                max-width: calc(100vw - 60px);
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                white-space: pre;
+              }
             }
           }
         }
@@ -139,4 +155,9 @@
     }
   }
 }
-  
+
+.mailItemRoot{
+  > div{
+    transition: 0.2s ease; 
+  }
+}
