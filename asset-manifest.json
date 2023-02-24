@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/ts-react-mailer-sample/static/css/main.26203964.css",
-    "main.js": "/ts-react-mailer-sample/static/js/main.957b36c7.js",
+    "main.css": "/ts-react-mailer-sample/static/css/main.44a9ec0c.css",
+    "main.js": "/ts-react-mailer-sample/static/js/main.77356d44.js",
     "static/js/787.a40513e3.chunk.js": "/ts-react-mailer-sample/static/js/787.a40513e3.chunk.js",
     "service-worker.js": "/ts-react-mailer-sample/service-worker.js",
     "index.html": "/ts-react-mailer-sample/index.html",
-    "main.26203964.css.map": "/ts-react-mailer-sample/static/css/main.26203964.css.map",
-    "main.957b36c7.js.map": "/ts-react-mailer-sample/static/js/main.957b36c7.js.map",
+    "main.44a9ec0c.css.map": "/ts-react-mailer-sample/static/css/main.44a9ec0c.css.map",
+    "main.77356d44.js.map": "/ts-react-mailer-sample/static/js/main.77356d44.js.map",
     "787.a40513e3.chunk.js.map": "/ts-react-mailer-sample/static/js/787.a40513e3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.26203964.css",
-    "static/js/main.957b36c7.js"
+    "static/css/main.44a9ec0c.css",
+    "static/js/main.77356d44.js"
   ]
 }
