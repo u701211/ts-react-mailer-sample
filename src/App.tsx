@@ -15,11 +15,12 @@ function App() {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path="/" component={HomePage} exact />
+          <Route path="/index.html" component={HomePage} exact />
           <Route path="/mails/" component={DetailPage} />
           <Route path="/" component={NotFoundPage} />
         </Switch>
       </BrowserRouter>
-  </MessageboxProvider>
+    </MessageboxProvider>
   );
 }
 

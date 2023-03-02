@@ -2,7 +2,7 @@
   "name": "ts-react-mailer-sample",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://akatonboX.github.io/ts-react-mailer-sample/",
+  "homepage": "http://localhost:3000/assets/spa/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -47,6 +47,7 @@
   "scripts": {
     "start": "cross-env REACT_APP_AXIOS_MODE=mock react-scripts start",
     "build": "cross-env REACT_APP_AXIOS_MODE=mock react-scripts build",
+    "buildgawa": "cross-env BUILD_PATH='../gawa/assets/spa' REACT_APP_AXIOS_MODE=mock react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "yarn build && gh-pages -d build"
